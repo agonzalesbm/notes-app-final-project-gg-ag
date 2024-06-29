@@ -10,7 +10,7 @@ import com.notesapp.models.Note
 @Dao
 interface NoteDao {
     @Insert
-    suspend fun insertNote(note: Note): String
+    suspend fun insertNote(note: Note): Long
 
     @Update
     suspend fun updateNote(note: Note)
