@@ -9,8 +9,12 @@
         tools:context=".NoteDetailFragment"
         android:background="@color/black">
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp">
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -19,8 +23,8 @@
                 android:src="@drawable/baseline_arrow_back_ios_new_24"
                 android:background="@color/transparent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/pinButton"
@@ -28,48 +32,70 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_location_pin_24"
                 android:background="@color/transparent"
-                android:layout_marginStart="200dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/saveButton"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:textSize="16sp"
                 android:backgroundTint="@color/orange"
-                android:textColor="@color/white"
-                android:layout_marginEnd="20dp"
+                android:textColor="@color/salt"
                 android:text="@string/save"
                 android:background="@color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="35sp"
-            android:textColor="@color/white"
-            android:text="Title"
-            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"
+            android:layout_marginTop="14dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:text="date"
-            />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
+            android:textColor="@color/salt"
+            android:textStyle="bold"
+            android:hint="@string/title"
+            android:background="@null"
+            android:textColorHint="@color/gray"
+            android:text=""
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="Date created: 2024/06/29" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="Body"
-            />
+            android:gravity="top|start"
+            android:text=""
+            android:hint="@string/insert_text"
+            android:textColorHint="@color/gray"
+            android:background="@null"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
     </LinearLayout>
 </layout>

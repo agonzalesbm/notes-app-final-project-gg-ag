@@ -11,4 +11,6 @@
     <string name="nombre_de_usuario">Nombre de usuario</string>
     <string name="log_out">LOG OUT</string>
     <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="insert_text">Insert text...</string>
 </resources>

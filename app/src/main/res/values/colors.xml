@@ -3,5 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#D54A32</color>
+    <color name="gray">#928d95</color>
+    <color name="salt">#fafcf9</color>
     <color name="transparent">#00000000</color>
 </resources>
