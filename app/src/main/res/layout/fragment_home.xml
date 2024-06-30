@@ -9,24 +9,46 @@
         android:background="@color/black"
         tools:context=".HomeFragment">
 
-        <TextView
-            android:id="@+id/titleView"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notes"
-            android:textColor="@color/white"
-            android:textSize="30sp"
+            android:background="@color/orange"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="Notes"
+                android:textColor="@color/white"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="@id/constraintHeader"
+                app:layout_constraintBaseline_toTopOf="parent"/>
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="35dp"
+                android:background="@drawable/rounded_corners"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleView" />
+            app:layout_constraintTop_toBottomOf="@id/constraintHeader" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -35,7 +57,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:clickable="true"
-            android:src="@android:drawable/ic_input_add"
+            android:backgroundTint="@color/orange"
+            android:src="@drawable/baseline_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

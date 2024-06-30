@@ -16,6 +16,7 @@
             android:textSize="35sp"
             android:textStyle="bold"
             android:gravity="center"
+            android:textColor="@color/white"
             android:text="@string/log_in" />
 
         <ImageView
@@ -39,8 +40,9 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
             android:ems="10"
-            android:hint="@string/enter_email"
+            android:hint="@string/email"
             android:drawableLeft="@drawable/baseline_email_24"
+            android:drawablePadding="10dp"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -51,8 +53,9 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
             android:ems="10"
-            android:hint="@string/enter_password"
+            android:hint="@string/password"
             android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawablePadding="10dp"
             android:inputType="textPassword" />
 
         <Button
@@ -66,6 +69,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:drawableLeft="@drawable/baseline_login_24"
             android:text="@string/log_in_button" />
     </LinearLayout>
 </layout>
