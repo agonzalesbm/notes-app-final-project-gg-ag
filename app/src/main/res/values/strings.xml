@@ -10,4 +10,5 @@
     <string name="profile">Profile</string>
     <string name="nombre_de_usuario">Nombre de usuario</string>
     <string name="log_out">LOG OUT</string>
+    <string name="save">Save</string>
 </resources>
