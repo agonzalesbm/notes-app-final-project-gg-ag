@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.notesapp.viewmodels.LoginViewModel" />
+    </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -40,6 +45,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
             android:ems="10"
+            android:text="@={loginViewModel.username}"
             android:hint="@string/email"
             android:drawableLeft="@drawable/baseline_email_24"
             android:drawablePadding="10dp"
@@ -54,18 +60,20 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:hint="@string/password"
+            android:text="@={loginViewModel.password}"
             android:drawableLeft="@drawable/baseline_lock_24"
             android:drawablePadding="10dp"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/loginButton"
+            android:enabled="@{loginViewModel.isValid}"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:backgroundTint="@color/orange"
             android:textColor="@color/white"
+            android:backgroundTint="@drawable/button_background_selector"
             android:layout_marginTop="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -73,3 +81,5 @@
             android:text="@string/log_in_button" />
     </LinearLayout>
 </layout>
+
+<!--    android:backgroundTint="@color/orange"-->
