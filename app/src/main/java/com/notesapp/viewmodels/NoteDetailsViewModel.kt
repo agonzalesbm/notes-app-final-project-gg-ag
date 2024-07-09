@@ -28,7 +28,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
     }
 
     private fun insert(note: Note) = viewModelScope.launch {
-        repository.insert(note)
+        repository.insertToApi(note)
     }
 
     private fun update(note: Note) = viewModelScope.launch {
@@ -38,7 +38,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
     fun save() {
         if (notesSharedViewModel.selectedNote == null) {
             if (!(noteTitle.value).isNullOrBlank() && !(noteBody.value).isNullOrBlank()) {
-                insert(Note("0", noteTitle.value!!, 0.0f, 0.0f, 0L, "", noteBody.value!!))
+                insert(Note("0", noteTitle.value!!, 0.0f, 0.0f, "", "", noteBody.value!!))
                 noteTitle.value = ""
                 noteBody.value = ""
             }

@@ -1,8 +1,10 @@
 package com.notesapp.viewmodels
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.notesapp.models.Note
 import com.notesapp.repository.NotesRepository
+import kotlinx.coroutines.launch
 
 class NotesSharedViewModel(val repository: NotesRepository): ViewModel() {
     var selectedNote: Note? = null
@@ -10,5 +12,13 @@ class NotesSharedViewModel(val repository: NotesRepository): ViewModel() {
 
     fun selectedNote(note: Note) {
         selectedNote = note
+    }
+
+    fun getAllNotes() = viewModelScope.launch {
+        repository.getAll().collect() {result ->
+            if (!result) {
+
+            }
+        }
     }
 }
