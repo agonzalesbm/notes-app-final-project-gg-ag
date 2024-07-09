@@ -38,7 +38,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
     fun save() {
         if (notesSharedViewModel.selectedNote == null) {
             if (!(noteTitle.value).isNullOrBlank() && !(noteBody.value).isNullOrBlank()) {
-                insert(Note("0", noteTitle.value!!, 0.0f, 0.0f, "", "", noteBody.value!!))
+                insert(Note("", noteTitle.value!!, 0.0f, 0.0f, "", "", noteBody.value!!))
                 noteTitle.value = ""
                 noteBody.value = ""
             }

@@ -12,5 +12,5 @@ interface NotesApiService {
     suspend fun getNotes(): Response<ArrayList<Note>>
 
     @POST("/notes")
-    suspend fun postNote(@Body note: Note): Call<Note>
+    fun postNote(@Body note: Note): Call<String>
 }

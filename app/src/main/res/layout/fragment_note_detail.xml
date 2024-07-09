@@ -48,6 +48,7 @@
             <Button
                 android:id="@+id/saveButton"
                 android:enabled="@{detailsViewModel.isValid}"
+                android:onClick="@{() -> detailsViewModel.save()}"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:minWidth="0dp"
