@@ -47,6 +47,7 @@
             android:ems="10"
             android:text="@={loginViewModel.username}"
             android:hint="@string/email"
+            android:textColor="@color/white"
             android:drawableLeft="@drawable/baseline_email_24"
             android:drawablePadding="10dp"
             android:inputType="textEmailAddress" />
@@ -60,6 +61,7 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:hint="@string/password"
+            android:textColor="@color/white"
             android:text="@={loginViewModel.password}"
             android:drawableLeft="@drawable/baseline_lock_24"
             android:drawablePadding="10dp"
@@ -81,5 +83,3 @@
             android:text="@string/log_in_button" />
     </LinearLayout>
 </layout>
-
-<!--    android:backgroundTint="@color/orange"-->

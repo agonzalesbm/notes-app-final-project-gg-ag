@@ -31,6 +31,9 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
         binding.detailsViewModel = detailsViewModel
         binding.lifecycleOwner = this
         detailsViewModel.updateTexts()
+        binding.backButton.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)
+        }
         binding.saveButton.setOnClickListener {
             detailsViewModel.save()
             binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)

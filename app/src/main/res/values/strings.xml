@@ -12,4 +12,5 @@
     <string name="save">Save</string>
     <string name="title">Title</string>
     <string name="insert_text">Insert text...</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -38,7 +38,6 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
         repository.updateToApi(note)
     }
 
-
     fun save() {
         if (notesSharedViewModel.selectedNote == null) {
             if (!(noteTitle.value).isNullOrBlank() && !(noteBody.value).isNullOrBlank()) {
@@ -51,7 +50,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
                         noteTitle.value!!,
                         10.0f,
                         10.0f,
-                        "usuario6",
+                        "usuario7",
                         formattedDate,
                         noteBody.value!!
                     )

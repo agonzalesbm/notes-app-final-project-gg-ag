@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.notesapp.adapters.NotesRecyclerViewAdapter
 import com.notesapp.databinding.FragmentHomeBinding
 import com.notesapp.viewmodels.NotesSharedViewModel
@@ -46,7 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding.root.findNavController().navigate(direction)
         }
         val ownerContext = (activity as MainActivity)
-        binding.recyclerView.layoutManager = LinearLayoutManager(ownerContext, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager = GridLayoutManager(ownerContext,3)
         binding.recyclerView.adapter = adapter
         activity.let {
             viewModel.notes.observe(viewLifecycleOwner) { notes ->
