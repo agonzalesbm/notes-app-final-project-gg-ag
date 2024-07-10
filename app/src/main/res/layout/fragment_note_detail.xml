@@ -90,7 +90,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Date created: 2024/06/29" />
+            android:text="@{detailsViewModel.createdDate}" />
 
         <EditText
             android:layout_width="match_parent"

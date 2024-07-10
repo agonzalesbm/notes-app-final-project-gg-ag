@@ -30,6 +30,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getAllNotes()
         setupRecyclerView()
         setupAddButton()
+        setupProfileButton()
+    }
+
+    private fun setupProfileButton() {
+        binding.profileButton.setOnClickListener {
+            binding.root.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
     }
 
     private fun setupAddButton() {

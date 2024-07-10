@@ -14,6 +14,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
     var isValid = MediatorLiveData<Boolean>()
     var noteTitle = MutableLiveData<String>()
     var noteBody = MutableLiveData<String>()
+    val createdDate = MutableLiveData<String>()
 
     init {
         isValid.addSource(noteTitle) {
@@ -22,6 +23,7 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
         isValid.addSource(noteBody) {
             isValid.value = checkIfValid()
         }
+        actualDate()
     }
 
     fun updateTexts() {
@@ -68,6 +70,13 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
                 noteBody.value = ""
             }
         }
+    }
+
+    private fun actualDate() {
+        val date = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        val formattedDate = date.format(formatter)
+        createdDate.value = "Creation date: $formattedDate"
     }
 
     private fun checkIfValid() = !(noteTitle.value).isNullOrBlank() &&

@@ -37,7 +37,7 @@
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="80dp" />
+                android:maxHeight="60dp" />
             <TextView
                 android:id="@+id/dateNote"
                 android:text="@{note.date}"
