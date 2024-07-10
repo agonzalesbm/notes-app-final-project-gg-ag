@@ -13,7 +13,8 @@ import com.notesapp.models.Note
 
 class NotesRecyclerViewAdapter(
     var notes: List<Note>,
-    val clickListener: (Note) -> Unit
+    val clickListener: (Note) -> Unit,
+    val longClickListener: (View, Note) -> Unit
 ):RecyclerView.Adapter<NotesRecyclerViewAdapter.NoteViewHolder>() {
     inner class NoteViewHolder(val binding: NoteCardBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -34,27 +35,8 @@ class NotesRecyclerViewAdapter(
             clickListener(note)
         }
         holder.binding.contactCell.setOnLongClickListener {
-            showPopup(it, note);
+            longClickListener(it, note)
             true
-        }
-    }
-
-    private fun showPopup(view: View, note: Note) {
-        val popup = PopupMenu(view.context, view)
-        val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.popup_delete, popup.menu)
-        popup.setOnMenuItemClickListener { menuItem ->
-            handleMenuItemClick(menuItem, note)
-            true
-        }
-        popup.show()
-    }
-
-    private fun handleMenuItemClick(menuItem: MenuItem, note: Note) {
-        when (menuItem.itemId) {
-            R.id.delete -> {
-                println("DELETEEEEEEEEEEEEEEEEE")
-            }
         }
     }
 }

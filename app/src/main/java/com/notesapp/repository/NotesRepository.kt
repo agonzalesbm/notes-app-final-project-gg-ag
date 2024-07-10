@@ -21,6 +21,10 @@ class NotesRepository(
         notesDao.updateNote(note)
     }
 
+    suspend fun delete(note: Note) {
+        notesDao.deleteNote(note)
+    }
+
     fun getAll() = flow {
         val response = notesApiService.getNotes()
         if (response.isSuccessful && response.body() != null) {
@@ -43,7 +47,15 @@ class NotesRepository(
         val call = notesApiService.updateNote(note)
         val response = call.awaitResponse()
         if (response.isSuccessful) {
-            getAll().collect {}
+            getAll().collect { }
+        }
+    }
+
+    suspend fun deleteToApi(note: Note) {
+        val call = notesApiService.deleteNote(note)
+        val response = call.awaitResponse()
+        if (response.isSuccessful) {
+            getAll().collect { }
         }
     }
 

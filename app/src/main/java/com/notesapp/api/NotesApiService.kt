@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
+import retrofit2.http.HTTP
 import retrofit2.http.PUT
 
 interface NotesApiService {
@@ -21,4 +22,7 @@ interface NotesApiService {
 
     @POST("/login")
     fun login(@Body user: User): Call<String>
+
+    @HTTP(method = "DELETE", path = "/notes", hasBody = true)
+    fun deleteNote(@Body note: Note): Call<String>
 }

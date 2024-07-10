@@ -14,6 +14,14 @@ class NotesSharedViewModel(val repository: NotesRepository): ViewModel() {
         selectedNote = note
     }
 
+    private fun delete(note: Note) = viewModelScope.launch {
+        repository.deleteToApi(note)
+    }
+
+    fun deleteMenuItem(note: Note) {
+        delete(note)
+    }
+
     fun getAllNotes() = viewModelScope.launch {
         repository.getAll().collect() {result ->
             if (!result) {
