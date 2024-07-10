@@ -2,6 +2,7 @@ package com.notesapp.repository
 
 import com.notesapp.api.NotesApiService
 import com.notesapp.models.Note
+import com.notesapp.models.User
 import com.notesapp.room.NoteDao
 import kotlinx.coroutines.flow.flow
 import retrofit2.awaitResponse
@@ -32,9 +33,18 @@ class NotesRepository(
 
     suspend fun insertToApi(note: Note) {
         val call = notesApiService.postNote(note)
-        var response = call.awaitResponse()
+        val response = call.awaitResponse()
         if (response.isSuccessful) {
-            getAll().collect() { }
+            getAll().collect { }
         }
     }
+
+    suspend fun updateToApi(note: Note) {
+        val call = notesApiService.updateNote(note)
+        val response = call.awaitResponse()
+        if (response.isSuccessful) {
+            getAll().collect {}
+        }
+    }
+
 }

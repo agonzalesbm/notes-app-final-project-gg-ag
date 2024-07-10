@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.notesapp.models.Note
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewModel): ViewModel() {
+class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewModel) : ViewModel() {
     private val repository = notesSharedViewModel.repository
     var isValid = MediatorLiveData<Boolean>()
     var noteTitle = MutableLiveData<String>()
@@ -32,13 +34,28 @@ class NoteDetailsViewModel(private val notesSharedViewModel: NotesSharedViewMode
     }
 
     private fun update(note: Note) = viewModelScope.launch {
-        repository.update(note)
+//        repository.update(note)
+        repository.updateToApi(note)
     }
+
 
     fun save() {
         if (notesSharedViewModel.selectedNote == null) {
             if (!(noteTitle.value).isNullOrBlank() && !(noteBody.value).isNullOrBlank()) {
-                insert(Note("", noteTitle.value!!, 0.0f, 0.0f, "", "", noteBody.value!!))
+                val date = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
+                val formattedDate = date.format(formatter)
+                insert(
+                    Note(
+                        "",
+                        noteTitle.value!!,
+                        10.0f,
+                        10.0f,
+                        "usuario6",
+                        formattedDate,
+                        noteBody.value!!
+                    )
+                )
                 noteTitle.value = ""
                 noteBody.value = ""
             }
