@@ -17,6 +17,7 @@ class NoteDetailsViewModel(
     var noteTitle = MutableLiveData<String>()
     var noteBody = MutableLiveData<String>()
     val createdDate = MutableLiveData<String>()
+    lateinit var userId: String
 
     init {
         isValid.addSource(noteTitle) {
@@ -42,19 +43,22 @@ class NoteDetailsViewModel(
         repository.updateToApi(note)
     }
 
-    fun save() {
+    suspend fun save() {
         if (notesSharedViewModel.selectedNote == null) {
             if (!(noteTitle.value).isNullOrBlank() && !(noteBody.value).isNullOrBlank()) {
                 val date = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
                 val formattedDate = date.format(formatter)
+//                viewModelScope.launch {
+                userId = repository.getUserId().toString()
+//                }
                 insert(
                     Note(
                         "",
                         noteTitle.value!!,
                         10.0f,
                         10.0f,
-                        "usuario7",
+                        userId,
                         formattedDate,
                         noteBody.value!!
                     )

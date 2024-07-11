@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.notesapp.databinding.FragmentNoteDetailBinding
 import com.notesapp.viewmodels.NoteDetailsViewModel
 import com.notesapp.viewmodels.NotesSharedViewModel
+import kotlinx.coroutines.launch
 
 class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
     lateinit var binding: FragmentNoteDetailBinding
@@ -35,7 +37,9 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
             binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)
         }
         binding.saveButton.setOnClickListener {
-            detailsViewModel.save()
+            lifecycleScope.launch {
+                detailsViewModel.save()
+            }
             binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)
         }
     }
