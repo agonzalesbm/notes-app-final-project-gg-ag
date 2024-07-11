@@ -49,9 +49,7 @@ class NoteDetailsViewModel(
                 val date = LocalDateTime.now()
                 val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
                 val formattedDate = date.format(formatter)
-//                viewModelScope.launch {
-                userId = repository.getUserId().toString()
-//                }
+                userId = repository.getUserId()
                 insert(
                     Note(
                         "",

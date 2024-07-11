@@ -31,10 +31,9 @@ class LoginViewModel (val loginRepository: LoginRepository): ViewModel() {
 
     fun login() {
         viewModelScope.launch {
-            val userName =username.value.toString()
-            val password =password.value.toString()
-            loginRepository.login(User(userName, password ))
+            val userName = username.value.toString()
+            val password = password.value.toString()
+            loginRepository.login(User(userName, password))
         }
-
     }
 }

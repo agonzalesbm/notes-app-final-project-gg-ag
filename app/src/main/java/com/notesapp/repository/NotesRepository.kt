@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.notesapp.api.NotesApiService
 import com.notesapp.models.Note
-import com.notesapp.models.User
 import com.notesapp.room.NoteDao
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import retrofit2.awaitResponse
@@ -63,9 +63,9 @@ class NotesRepository(
         }
     }
 
-    suspend fun getUserId() = context.dataStore.data.collect { user ->
-        val userId = user[stringPreferencesKey("userId")] ?: "NAMEEEE"
-        println(userId)
+    suspend fun getUserId(): String {
+        return context.dataStore.data
+            .map { user -> user[stringPreferencesKey("userId")] ?: "asdf" }
+            .first()
     }
-
 }
