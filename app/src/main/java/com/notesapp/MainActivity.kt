@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.notesapp.viewmodels.LoginViewModel
+import com.notesapp.viewmodels.LoginViewModelFactory
 import com.notesapp.viewmodels.NoteDetailsViewModel
 import com.notesapp.viewmodels.NoteDetailsViewModelFactory
 import com.notesapp.viewmodels.NotesSharedViewModel
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         notesViewModel = ViewModelProvider(this, factory).get(NotesSharedViewModel::class.java)
         val detailsFactory = NoteDetailsViewModelFactory(notesViewModel)
         notesDetailsViewModel = ViewModelProvider(this, detailsFactory).get(NoteDetailsViewModel::class.java)
-        notesLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        val loginViewModelFactory = LoginViewModelFactory(applicationContext)
+        notesLoginViewModel = ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel::class.java)
     }
 }

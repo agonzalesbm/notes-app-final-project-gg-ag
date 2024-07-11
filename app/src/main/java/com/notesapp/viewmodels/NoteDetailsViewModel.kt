@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class NoteDetailsViewModel(
-    private val notesSharedViewModel: NotesSharedViewModel
+    private val notesSharedViewModel: NotesSharedViewModel,
 ) : ViewModel() {
     private val repository = notesSharedViewModel.repository
     var isValid = MediatorLiveData<Boolean>()

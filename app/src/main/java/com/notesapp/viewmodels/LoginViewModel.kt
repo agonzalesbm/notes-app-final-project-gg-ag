@@ -4,8 +4,12 @@ import android.util.Patterns
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.notesapp.models.User
+import com.notesapp.repository.LoginRepository
+import kotlinx.coroutines.launch
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel (val loginRepository: LoginRepository): ViewModel() {
     var isValid = MediatorLiveData<Boolean>()
     var username = MutableLiveData<String>()
     var password = MutableLiveData<String>()
@@ -26,6 +30,11 @@ class LoginViewModel: ViewModel() {
     }
 
     fun login() {
+        viewModelScope.launch {
+            val userName =username.value.toString()
+            val password =password.value.toString()
+            loginRepository.login(User(userName, password ))
+        }
 
     }
 }
