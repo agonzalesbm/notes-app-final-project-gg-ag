@@ -4,11 +4,13 @@ import android.util.Patterns
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.notesapp.models.User
 
-class LoginViewModel: ViewModel() {
+class LoginViewModel(val loginShareViewModel: LoginShareViewModel): ViewModel() {
     var isValid = MediatorLiveData<Boolean>()
     var username = MutableLiveData<String>()
     var password = MutableLiveData<String>()
+    private val repository = loginShareViewModel.repository
 
     init {
         isValid.addSource(username) {
@@ -25,7 +27,8 @@ class LoginViewModel: ViewModel() {
                 Patterns.EMAIL_ADDRESS.matcher(username.value).matches()
     }
 
-    fun login() {
-
+    suspend fun login() {
+        val user = User("", username.value.toString(), password.value.toString())
+        repository.login(user)
     }
 }
