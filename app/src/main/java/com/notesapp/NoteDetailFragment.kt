@@ -1,7 +1,9 @@
 package com.notesapp
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -64,11 +66,18 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
                 detailsViewModel.save()
                 tryGetLastLocation()
             }
-//            binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)
+        }
+        binding.locationButton.setOnClickListener {
+            val location = detailsViewModel.getLocation()
+            println(location)
+            val gmmIntentUri = Uri.parse("geo:0,0?q=$location")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
         }
     }
 
-    fun tryGetLastLocation() {
+    private fun tryGetLastLocation() {
         val ownerContext = requireContext()
         val hasFineLocation = ActivityCompat.checkSelfPermission(ownerContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         val hasCoarseLocation = ActivityCompat.checkSelfPermission(ownerContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -77,12 +86,9 @@ class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
             return
         }
         locationProvider.lastLocation.addOnSuccessListener { location ->
-            println("holaaaaaaaaaaaaa")
             if (location != null) {
                 detailsViewModel.latitude.value = location.latitude.toFloat()
                 detailsViewModel.longitude.value = location.longitude.toFloat()
-                println("longitud latitud")
-                //println("${location.latitude} ${location.longitude}")
             }
         }
         binding.root.findNavController().navigate(R.id.action_noteDetailFragment_to_homeFragment)

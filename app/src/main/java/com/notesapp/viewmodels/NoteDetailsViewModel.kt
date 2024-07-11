@@ -1,18 +1,9 @@
 package com.notesapp.viewmodels
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import androidx.activity.result.ActivityResultLauncher
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.notesapp.R
-import com.notesapp.databinding.FragmentNoteDetailBinding
 import com.notesapp.models.Note
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -87,6 +78,12 @@ class NoteDetailsViewModel(
                 noteBody.value = ""
             }
         }
+    }
+
+    fun getLocation(): String {
+        return notesSharedViewModel.selectedNote?.latitude.toString() +
+                "," +
+                notesSharedViewModel.selectedNote?.longitude.toString()
     }
 
     private fun actualDate() {
