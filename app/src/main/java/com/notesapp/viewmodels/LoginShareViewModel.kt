@@ -15,6 +15,7 @@ class LoginShareViewModel(val repository: LoginRepository) :
     ViewModel() {
     fun login(user: User) = viewModelScope.launch {
         val response = repository.login(user)
+        return response.body
         //save the data on dataStore using the response that containts the body
 //        dataStore.edit { preferences ->
 //            preferences[stringPreferencesKey("userName")] = response.toString()

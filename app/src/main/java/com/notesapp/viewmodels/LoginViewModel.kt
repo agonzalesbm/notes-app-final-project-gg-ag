@@ -29,6 +29,6 @@ class LoginViewModel(val loginShareViewModel: LoginShareViewModel): ViewModel() 
 
     suspend fun login() {
         val user = User("", username.value.toString(), password.value.toString())
-        repository.login(user)
+        return repository.login(user)
     }
 }

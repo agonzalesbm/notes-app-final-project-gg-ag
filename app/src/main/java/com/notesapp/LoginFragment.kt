@@ -42,12 +42,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.loginButton.setOnClickListener {
             println("clicked")
             lifecycleScope.launch(Dispatchers.IO) {
-//                saveValues(
-//                    loginViewModel.username.value.toString(),
-//                    loginViewModel.password.value.toString()
-//                )
-//                getUserProfile()
-                var response = loginViewModel.login()
+                saveValues(
+                    loginViewModel.username.value.toString(),
+                    loginViewModel.password.value.toString()
+                )
+                getUserProfile()
+//                var response = loginViewModel.login()
             }
             binding.root.findNavController().navigate(R.id.action_loginFragment_to_homeFragment2)
         }
