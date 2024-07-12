@@ -10,6 +10,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.notesapp.api.NotesApiService
 import com.notesapp.models.User
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import retrofit2.awaitResponse
 
 const val DATASTORE_NAME = "USER"
@@ -39,5 +41,11 @@ class LoginRepository(
             return userId
         }
         return null
+    }
+
+    suspend fun getUserId(): String {
+        return context.dataStore.data
+            .map { user -> user[stringPreferencesKey("userId")] ?: "EMPTY" }
+            .first()
     }
 }

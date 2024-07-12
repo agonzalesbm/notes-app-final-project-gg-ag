@@ -1,6 +1,7 @@
 package com.notesapp.repository
 
 import android.content.Context
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.notesapp.api.NotesApiService
 import com.notesapp.models.Note
@@ -65,7 +66,13 @@ class NotesRepository(
 
     suspend fun getUserId(): String {
         return context.dataStore.data
-            .map { user -> user[stringPreferencesKey("userId")] ?: "asdf" }
+            .map { user -> user[stringPreferencesKey("userId")] ?: "EMPTY" }
             .first()
+    }
+
+    suspend fun deleteSession() {
+        context.dataStore.edit { user ->
+            user[stringPreferencesKey("userId")] = "EMPTY"
+        }
     }
 }

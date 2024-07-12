@@ -30,6 +30,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         loginViewModel = (activity as MainActivity).notesLoginViewModel
         binding.loginViewModel = loginViewModel
         binding.lifecycleOwner = this
+        lifecycleScope.launch {
+            if (loginViewModel.isSessionCreated()) {
+                binding.root.findNavController()
+                    .navigate(R.id.action_loginFragment_to_homeFragment2)
+                return@launch
+            }
+        }
         binding.loginButton.setOnClickListener {
             lifecycleScope.launch {
                 val result = loginViewModel.login()
@@ -37,6 +44,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     Toast.makeText(context, failLogin, Toast.LENGTH_SHORT).show()
                     return@launch
                 } else {
+                    binding.entryEmail.setText("")
+                    binding.entryPassword.setText("")
                     binding.root.findNavController()
                         .navigate(R.id.action_loginFragment_to_homeFragment2)
                 }

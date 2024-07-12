@@ -8,12 +8,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.notesapp.adapters.NotesRecyclerViewAdapter
 import com.notesapp.databinding.FragmentHomeBinding
 import com.notesapp.models.Note
 import com.notesapp.viewmodels.NotesSharedViewModel
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var binding: FragmentHomeBinding
@@ -22,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -34,12 +36,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getAllNotes()
         setupRecyclerView()
         setupAddButton()
-        setupProfileButton()
+        logoutButton()
     }
 
-    private fun setupProfileButton() {
-        binding.profileButton.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+    private fun logoutButton() {
+        binding.logoutButton.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.logOut()
+            }
+            binding.root.findNavController()
+                .navigate(R.id.action_homeFragment_to_loginFragment)
         }
     }
 
@@ -63,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         )
         val ownerContext = (activity as MainActivity)
-        binding.recyclerView.layoutManager = GridLayoutManager(ownerContext,3)
+        binding.recyclerView.layoutManager = GridLayoutManager(ownerContext, 3)
         binding.recyclerView.adapter = adapter
         activity.let {
             viewModel.notes.observe(viewLifecycleOwner) { notes ->

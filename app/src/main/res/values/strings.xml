@@ -13,4 +13,6 @@
     <string name="title">Title</string>
     <string name="insert_text">Insert text...</string>
     <string name="delete">Delete</string>
+    <string name="logout">LOGOUT</string>
+    <string name="notes">Notes</string>
 </resources>

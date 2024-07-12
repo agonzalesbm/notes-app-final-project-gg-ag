@@ -32,4 +32,8 @@ class LoginViewModel(val loginRepository: LoginRepository) : ViewModel() {
         val password = password.value.toString()
         return loginRepository.login(User(userName, password))
     }
+
+    suspend fun isSessionCreated(): Boolean{
+        return loginRepository.getUserId() != "EMPTY"
+    }
 }
