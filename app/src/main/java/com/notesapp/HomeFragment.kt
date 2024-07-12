@@ -40,14 +40,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).notesViewModel
         viewModel.getAllNotes()
+        connectivityObserver = NetworkConnectivityObserver(requireContext())
         setupRecyclerView()
         setupAddButton()
         logoutButton()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        connectivityObserver = NetworkConnectivityObserver(requireContext())
         connection()
     }
 
@@ -58,14 +54,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     withContext(Dispatchers.Main) {
                         println("No internet")
                         isNetworkAvailable = false
-                        println(isNetworkAvailable)
+                        println("onCreate $isNetworkAvailable")
                         binding.floatingActionButton.isEnabled = false
                     }
                 } else {
                     withContext(Dispatchers.Main) {
                         println("Available")
                         isNetworkAvailable = true
-                        println(isNetworkAvailable)
+                        println("onCreate $isNetworkAvailable")
                         binding.floatingActionButton.isEnabled = true
                     }
                 }
