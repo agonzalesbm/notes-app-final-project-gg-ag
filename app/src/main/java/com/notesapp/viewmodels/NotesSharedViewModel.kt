@@ -23,9 +23,10 @@ class NotesSharedViewModel(val repository: NotesRepository): ViewModel() {
     }
 
     fun getAllNotes() = viewModelScope.launch {
-        repository.getAll().collect() {result ->
+        repository.getAll().collect { result ->
             if (!result) {
-
+                repository.notes
+                println("no hay nada")
             }
         }
     }

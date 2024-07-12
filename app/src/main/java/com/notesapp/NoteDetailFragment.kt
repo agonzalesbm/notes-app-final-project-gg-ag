@@ -16,9 +16,13 @@ import androidx.navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.notesapp.databinding.FragmentNoteDetailBinding
+import com.notesapp.network.ConnectivityObserver
+import com.notesapp.network.NetworkConnectivityObserver
 import com.notesapp.viewmodels.NoteDetailsViewModel
 import com.notesapp.viewmodels.NotesSharedViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteDetailFragment : Fragment(R.layout.fragment_note_detail) {
     lateinit var binding: FragmentNoteDetailBinding

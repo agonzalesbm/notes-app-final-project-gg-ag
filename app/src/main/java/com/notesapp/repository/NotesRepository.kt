@@ -57,6 +57,7 @@ class NotesRepository(
     }
 
     suspend fun deleteToApi(note: Note) {
+        delete(note)
         val call = notesApiService.deleteNote(note)
         val response = call.awaitResponse()
         if (response.isSuccessful) {

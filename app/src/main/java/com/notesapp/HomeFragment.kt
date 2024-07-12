@@ -14,13 +14,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.notesapp.adapters.NotesRecyclerViewAdapter
 import com.notesapp.databinding.FragmentHomeBinding
 import com.notesapp.models.Note
+import com.notesapp.network.ConnectivityObserver
+import com.notesapp.network.NetworkConnectivityObserver
 import com.notesapp.viewmodels.NotesSharedViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     lateinit var binding: FragmentHomeBinding
     lateinit var viewModel: NotesSharedViewModel
     lateinit var adapter: NotesRecyclerViewAdapter
+    lateinit var connectivityObserver: ConnectivityObserver
+    private var isNetworkAvailable = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         setupAddButton()
         logoutButton()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        connectivityObserver = NetworkConnectivityObserver(requireContext())
+        connection()
+    }
+
+    private fun connection() {
+        lifecycleScope.launch {
+            connectivityObserver.observer().collect {
+                if (it != ConnectivityObserver.Status.Available) {
+                    withContext(Dispatchers.Main) {
+                        println("No internet")
+                        isNetworkAvailable = false
+                        println(isNetworkAvailable)
+                        binding.floatingActionButton.isEnabled = false
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        println("Available")
+                        isNetworkAvailable = true
+                        println(isNetworkAvailable)
+                        binding.floatingActionButton.isEnabled = true
+                    }
+                }
+            }
+        }
     }
 
     private fun logoutButton() {
@@ -61,8 +95,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             notes = listOf(),
             clickListener = { note ->
                 viewModel.selectedNote(note)
-                val direction = HomeFragmentDirections.actionHomeFragmentToNoteDetailFragment()
-                binding.root.findNavController().navigate(direction)
+                if (isNetworkAvailable) {
+                    val direction1 = HomeFragmentDirections.actionHomeFragmentToNoteDetailFragment()
+                    binding.root.findNavController().navigate(direction1)
+                } else {
+                    val direction = HomeFragmentDirections.actionHomeFragmentToOfflineNoteDetails()
+                    binding.root.findNavController().navigate(direction)
+                }
             },
             longClickListener = { view, note ->
                 showPopup(view, note)

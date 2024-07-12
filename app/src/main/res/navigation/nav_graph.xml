@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_offlineNoteDetails"
+            app:destination="@id/offlineNoteDetails" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
@@ -49,5 +52,14 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/offlineNoteDetails"
+        android:name="com.notesapp.OfflineNoteDetails"
+        android:label="fragment_offline_note_details"
+        tools:layout="@layout/fragment_offline_note_details" >
+        <action
+            android:id="@+id/action_offlineNoteDetails_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
