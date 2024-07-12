@@ -103,7 +103,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             },
             longClickListener = { view, note ->
-                showPopup(view, note)
+                if (isNetworkAvailable) {
+                    showPopup(view, note)
+                }
             }
         )
         val ownerContext = (activity as MainActivity)

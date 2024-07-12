@@ -30,6 +30,7 @@ class OfflineNoteDetails : Fragment(R.layout.fragment_offline_note_details) {
         binding.detailsViewModel = detailsViewModel
         binding.lifecycleOwner = this
         detailsViewModel.updateTexts()
+        binding.saveButton.isEnabled = false
         binding.backButton.setOnClickListener {
             binding.root.findNavController().navigate(R.id.action_offlineNoteDetails_to_homeFragment)
         }
