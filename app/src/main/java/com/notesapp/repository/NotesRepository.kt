@@ -31,7 +31,8 @@ class NotesRepository(
     }
 
     fun getAll() = flow {
-        val response = notesApiService.getNotes()
+        val userId = getUserId()
+        val response = notesApiService.getNotes(userId)
         if (response.isSuccessful && response.body() != null) {
             notesDao.insertAll(response.body()!!)
             emit(true)

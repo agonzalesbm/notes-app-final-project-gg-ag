@@ -9,10 +9,11 @@ import retrofit2.http.POST
 import retrofit2.http.Body
 import retrofit2.http.HTTP
 import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface NotesApiService {
-    @GET("/notes?user_id=usuario7")
-    suspend fun getNotes(): Response<ArrayList<Note>>
+    @GET("/notes")
+    suspend fun getNotes(@Query("user_id") userId: String): Response<ArrayList<Note>>
 
     @POST("/notes")
     fun postNote(@Body note: Note): Call<String>
