@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.notesapp.databinding.FragmentLoginBinding
 import com.notesapp.viewmodels.LoginViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -32,8 +33,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.lifecycleOwner = this
         lifecycleScope.launch {
             if (loginViewModel.isSessionCreated()) {
-                binding.root.findNavController()
-                    .navigate(R.id.action_loginFragment_to_homeFragment2)
+                binding.root.visibility = View.GONE
+                lifecycleScope.launch {
+                    delay(100)
+                    binding.root.findNavController()
+                        .navigate(R.id.action_loginFragment_to_homeFragment2)
+                }
                 return@launch
             }
         }
