@@ -30,6 +30,10 @@ class NotesRepository(
         notesDao.deleteNote(note)
     }
 
+    suspend fun deleteAll() {
+        notesDao.deleteNotes()
+    }
+
     fun getAll() = flow {
         val userId = getUserId()
         val response = notesApiService.getNotes(userId)
