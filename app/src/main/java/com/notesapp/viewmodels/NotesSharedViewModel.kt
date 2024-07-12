@@ -34,4 +34,8 @@ class NotesSharedViewModel(val repository: NotesRepository): ViewModel() {
     suspend fun logOut() {
         repository.deleteSession()
     }
+
+    suspend fun deleteAll() {
+        repository.deleteAll()
+    }
 }

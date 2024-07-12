@@ -23,6 +23,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes")
     fun getAllNotes(): LiveData<List<Note>>
 
+    @Query("DELETE FROM notes WHERE 1")
+    fun deleteNotes()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(notes: List<Note>)
 }

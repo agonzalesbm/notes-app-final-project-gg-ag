@@ -74,6 +74,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             lifecycleScope.launch {
                 viewModel.logOut()
             }
+            lifecycleScope.launch (Dispatchers.IO){
+                viewModel.deleteAll()
+            }
             binding.root.findNavController()
                 .navigate(R.id.action_homeFragment_to_loginFragment)
         }
